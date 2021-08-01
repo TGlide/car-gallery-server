@@ -1,0 +1,370 @@
+type Car implements Node {
+  createdAt: Datetime
+  id: Int!
+  images: [String]!
+  name: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""
+A condition to be used against `Car` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input CarCondition {
+  """Checks for equality with the object’s `createdAt` field."""
+  createdAt: Datetime
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `images` field."""
+  images: [String]
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""An input for mutations affecting `Car`"""
+input CarInput {
+  createdAt: Datetime
+  id: Int
+  images: [String]!
+  name: String!
+}
+
+"""Represents an update to a `Car`. Fields that are set will be updated."""
+input CarPatch {
+  createdAt: Datetime
+  id: Int
+  images: [String]
+  name: String
+}
+
+"""A connection to a list of `Car` values."""
+type CarsConnection {
+  """
+  A list of edges which contains the `Car` and cursor to aid in pagination.
+  """
+  edges: [CarsEdge!]!
+
+  """A list of `Car` objects."""
+  nodes: [Car!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Car` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Car` edge in the connection."""
+type CarsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Car` at the end of the edge."""
+  node: Car!
+}
+
+"""Methods to use when ordering `Car`."""
+enum CarsOrderBy {
+  CREATED_AT_ASC
+  CREATED_AT_DESC
+  ID_ASC
+  ID_DESC
+  IMAGES_ASC
+  IMAGES_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""All input for the create `Car` mutation."""
+input CreateCarInput {
+  """The `Car` to be created by this mutation."""
+  car: CarInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `Car` mutation."""
+type CreateCarPayload {
+  """The `Car` that was created by this mutation."""
+  car: Car
+
+  """An edge for our `Car`. May be used by Relay 1."""
+  carEdge(
+    """The method to use when ordering `Car`."""
+    orderBy: [CarsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CarsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""All input for the `deleteCarById` mutation."""
+input DeleteCarByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteCar` mutation."""
+input DeleteCarInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Car` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Car` mutation."""
+type DeleteCarPayload {
+  """The `Car` that was deleted by this mutation."""
+  car: Car
+
+  """An edge for our `Car`. May be used by Relay 1."""
+  carEdge(
+    """The method to use when ordering `Car`."""
+    orderBy: [CarsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CarsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedCarId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Car`."""
+  createCar(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateCarInput!
+  ): CreateCarPayload
+
+  """Deletes a single `Car` using its globally unique id."""
+  deleteCar(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCarInput!
+  ): DeleteCarPayload
+
+  """Deletes a single `Car` using a unique key."""
+  deleteCarById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCarByIdInput!
+  ): DeleteCarPayload
+
+  """Updates a single `Car` using its globally unique id and a patch."""
+  updateCar(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCarInput!
+  ): UpdateCarPayload
+
+  """Updates a single `Car` using a unique key and a patch."""
+  updateCarById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCarByIdInput!
+  ): UpdateCarPayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """Reads and enables pagination through a set of `Car`."""
+  allCars(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: CarCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Car`."""
+    orderBy: [CarsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CarsConnection
+
+  """Reads a single `Car` using its globally unique `ID`."""
+  car(
+    """The globally unique `ID` to be used in selecting a single `Car`."""
+    nodeId: ID!
+  ): Car
+  carById(id: Int!): Car
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+}
+
+"""
+The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
+"""
+type Subscription {
+  time: TimePayload
+}
+
+type TimePayload {
+  currentTimestamp: String
+  query: Query
+}
+
+"""All input for the `updateCarById` mutation."""
+input UpdateCarByIdInput {
+  """
+  An object where the defined keys will be set on the `Car` being updated.
+  """
+  carPatch: CarPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `updateCar` mutation."""
+input UpdateCarInput {
+  """
+  An object where the defined keys will be set on the `Car` being updated.
+  """
+  carPatch: CarPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Car` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Car` mutation."""
+type UpdateCarPayload {
+  """The `Car` that was updated by this mutation."""
+  car: Car
+
+  """An edge for our `Car`. May be used by Relay 1."""
+  carEdge(
+    """The method to use when ordering `Car`."""
+    orderBy: [CarsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CarsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
