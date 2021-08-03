@@ -1,4 +1,4 @@
-import { DATABASE_URL } from "./config";
+import { DATABASE_URL, isDevelopment } from "./config";
 import type { Pool } from "pg";
 import {
   PostGraphileOptions,
@@ -34,7 +34,9 @@ const MySubscriptionPlugin = makeExtendSchemaPlugin((build) => {
 });
 
 // Connection string (or pg.Pool) for PostGraphile to use
-export const database: string | Pool = DATABASE_URL;
+export const database: string | Pool = `${DATABASE_URL}${
+  isDevelopment ? "" : "?ssl=true"
+}`;
 
 // Database schemas to use
 export const schemas: string | string[] = ["public"];
