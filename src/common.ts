@@ -54,7 +54,7 @@ export const options: PostGraphileOptions = {
         (req as any).normalizedConnectionParams?.["x-user-id"],
     };
   },
-  watchPg: true,
+  watchPg: isDevelopment ? true : false,
   graphiql: true,
   enhanceGraphiql: true,
   subscriptions: true,

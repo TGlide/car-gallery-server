@@ -44,7 +44,7 @@ exports.options = {
                 (_a = req.normalizedConnectionParams) === null || _a === void 0 ? void 0 : _a["x-user-id"]),
         };
     },
-    watchPg: true,
+    watchPg: config_1.isDevelopment ? true : false,
     graphiql: true,
     enhanceGraphiql: true,
     subscriptions: true,
