@@ -34,9 +34,7 @@ const MySubscriptionPlugin = makeExtendSchemaPlugin((build) => {
 });
 
 // Connection string (or pg.Pool) for PostGraphile to use
-export const database: string | Pool = `${DATABASE_URL}${
-  isDevelopment ? "" : "?ssl=true"
-}`;
+export const database: string | Pool = `${DATABASE_URL}`;
 
 // Database schemas to use
 export const schemas: string | string[] = ["public"];

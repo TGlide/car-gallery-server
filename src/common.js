@@ -25,7 +25,7 @@ var MySubscriptionPlugin = postgraphile_1.makeExtendSchemaPlugin(function (build
     };
 });
 // Connection string (or pg.Pool) for PostGraphile to use
-exports.database = "" + config_1.DATABASE_URL + (config_1.isDevelopment ? "" : "?ssl=true");
+exports.database = "" + config_1.DATABASE_URL;
 // Database schemas to use
 exports.schemas = ["public"];
 // PostGraphile options; see https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options
