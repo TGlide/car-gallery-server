@@ -10,7 +10,6 @@ var config_1 = require("./config");
 var middleware = postgraphile_1.postgraphile(common_1.database, common_1.schemas, common_1.options);
 var fastify = fastify_1.default({ logger: true });
 fastify.register(require("fastify-cors"), {
-    origin: config_1.FRONTEND_URL,
     allowedHeaders: ["Content-Type"],
 });
 /**

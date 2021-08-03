@@ -12,7 +12,6 @@ const middleware = postgraphile(database, schemas, options);
 const fastify = Fastify({ logger: true });
 
 fastify.register(require("fastify-cors"), {
-  origin: FRONTEND_URL,
   allowedHeaders: ["Content-Type"],
 });
 
