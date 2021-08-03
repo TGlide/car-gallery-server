@@ -50,7 +50,7 @@ if (middleware.options.watchPg) {
         fastify.get(middleware.eventStreamRoute, convertHandler(middleware.eventStreamRouteHandler));
     }
 }
-fastify.listen(common_1.port, function (err, address) {
+fastify.listen({ port: common_1.port, host: config_1.isDevelopment ? "127.0.0.1" : "0.0.0.0" }, function (err, address) {
     if (err) {
         fastify.log.error(String(err));
         process.exit(1);

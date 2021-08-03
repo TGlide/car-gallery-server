@@ -5,7 +5,7 @@ import {
   PostGraphileResponse,
 } from "postgraphile";
 import { database, schemas, options, port } from "./common";
-import { FRONTEND_URL } from "./config";
+import { FRONTEND_URL, isDevelopment } from "./config";
 
 const middleware = postgraphile(database, schemas, options);
 
@@ -76,12 +76,15 @@ if (middleware.options.watchPg) {
   }
 }
 
-fastify.listen(port, (err, address) => {
-  if (err) {
-    fastify.log.error(String(err));
-    process.exit(1);
+fastify.listen(
+  { port, host: isDevelopment ? "127.0.0.1" : "0.0.0.0" },
+  (err, address) => {
+    if (err) {
+      fastify.log.error(String(err));
+      process.exit(1);
+    }
+    fastify.log.info(
+      `PostGraphiQL available at ${address}${middleware.graphiqlRoute} 🚀`
+    );
   }
-  fastify.log.info(
-    `PostGraphiQL available at ${address}${middleware.graphiqlRoute} 🚀`
-  );
-});
+);
