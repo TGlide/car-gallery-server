@@ -11,5 +11,6 @@ dotenv.config({
     path: path_1.default.resolve(__dirname, "../.env"),
 });
 exports.DATABASE_URL = process.env.DATABASE_URL || "postgraphile";
+console.log("DEBUG DB URL", exports.DATABASE_URL);
 exports.FRONTEND_URL = process.env.FRONTEND_URL || "";
 exports.isDevelopment = process.env.ENVIRONMENT === "development";
