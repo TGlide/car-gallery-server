@@ -8,6 +8,7 @@ type Car implements Node {
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
+  year: Int
 }
 
 """
@@ -25,6 +26,9 @@ input CarCondition {
 
   """Checks for equality with the object’s `name` field."""
   name: String
+
+  """Checks for equality with the object’s `year` field."""
+  year: Int
 }
 
 """An input for mutations affecting `Car`"""
@@ -33,6 +37,7 @@ input CarInput {
   id: Int
   images: [String]!
   name: String!
+  year: Int
 }
 
 """Represents an update to a `Car`. Fields that are set will be updated."""
@@ -41,6 +46,7 @@ input CarPatch {
   id: Int
   images: [String]
   name: String
+  year: Int
 }
 
 """A connection to a list of `Car` values."""
@@ -82,6 +88,8 @@ enum CarsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+  YEAR_ASC
+  YEAR_DESC
 }
 
 """All input for the create `Car` mutation."""

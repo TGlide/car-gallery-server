@@ -5,10 +5,16 @@ import {
   PostGraphileResponse,
 } from "postgraphile";
 import { database, schemas, options, port } from "./common";
+import { FRONTEND_URL } from "./config";
 
 const middleware = postgraphile(database, schemas, options);
 
 const fastify = Fastify({ logger: true });
+
+fastify.register(require("fastify-cors"), {
+  origin: FRONTEND_URL,
+  allowedHeaders: ["Content-Type"],
+});
 
 /**
  * Converts a PostGraphile route handler into a Fastify request handler.
