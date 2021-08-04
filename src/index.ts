@@ -5,7 +5,7 @@ import {
   PostGraphileResponse,
 } from "postgraphile";
 import { database, schemas, options, port } from "./common";
-import { FRONTEND_URL, isDevelopment } from "./config";
+import { isDevelopment } from "./config";
 
 const middleware = postgraphile(database, schemas, options);
 

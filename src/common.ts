@@ -1,4 +1,4 @@
-import { DATABASE_URL, isDevelopment } from "./config";
+import { DATABASE_URL, isDevelopment, isProduction } from "./config";
 import type { Pool } from "pg";
 import {
   PostGraphileOptions,
@@ -67,6 +67,8 @@ export const options: PostGraphileOptions = {
   legacyRelations: "omit",
   exportGqlSchemaPath: `${__dirname}/schema.graphql`,
   sortExport: true,
+  retryOnInitFail: isProduction ? true : undefined,
+  enableQueryBatching: true,
 };
 
 export const port: number = process.env.PORT
