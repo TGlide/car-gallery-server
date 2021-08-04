@@ -62,7 +62,7 @@ cd car-gallery-server
 yarn
 ```
 
-### 3. Create postgres db and tables
+#### 3. Create postgres db and tables
 
 Create your local postgres database, and run the following sql command to create a table for cars:
 
