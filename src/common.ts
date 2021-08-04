@@ -84,7 +84,6 @@ export const options: PostGraphileOptions = {
   legacyRelations: "omit",
   exportGqlSchemaPath: `${__dirname}/schema.graphql`,
   sortExport: true,
-  retryOnInitFail: isProduction ? true : undefined,
   enableQueryBatching: true,
 };
 

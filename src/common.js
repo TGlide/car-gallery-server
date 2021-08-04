@@ -74,7 +74,6 @@ exports.options = {
     legacyRelations: "omit",
     exportGqlSchemaPath: __dirname + "/schema.graphql",
     sortExport: true,
-    retryOnInitFail: config_1.isProduction ? true : undefined,
     enableQueryBatching: true,
 };
 exports.port = process.env.PORT
