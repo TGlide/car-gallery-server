@@ -53,7 +53,7 @@ To get a local copy up and running follow these simple steps.
 
 ```sh
 git clone https://github.com/TGlide/car-gallery-server/
-cd car-gallery-webapp
+cd car-gallery-server
 ```
 
 #### 2. Install Yarn dependencies
