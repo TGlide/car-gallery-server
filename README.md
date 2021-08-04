@@ -91,7 +91,7 @@ Create a `.env.local` file with the following variables:
 ### Run App
 
 ```sh
-yarn build && y start
+yarn build && yarn start
 ```
 
 
